@@ -18,6 +18,6 @@ class Article extends Model
 
     public function developers(): BelongsToMany
     {
-        return $this->belongsToMany(Developer::class, 'developer_article', 'developer_id', 'article_id');
+        return $this->belongsToMany(Developer::class, 'developer_article', 'article_id', 'developer_id');
     }
 }
