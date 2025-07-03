@@ -2,11 +2,13 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Article extends Model
 {
+    use HasFactory;
     protected $fillable = [
         'title',
         'slug',
@@ -16,7 +18,6 @@ class Article extends Model
 
     public function developers(): BelongsToMany
     {
-//        return $this->belongsToMany(Developer::class, 'developer_article', 'article_id', 'developer_id');
-        return $this->belongsToMany(Developer::class);
+        return $this->belongsToMany(Developer::class, 'developer_article', 'developer_id', 'article_id');
     }
 }
