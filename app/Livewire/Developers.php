@@ -16,7 +16,7 @@ class Developers extends Component
     public function render()
     {
         // Fetch developers with pagination
-        $developers = Developer::orderBy('created_at', 'desc')->paginate(12);
+        $developers = Developer::orderBy('created_at', 'desc')->paginate(9);
         return view('livewire.developers', [
             'developers' => $developers
         ]);

@@ -26,12 +26,14 @@
             <div class="rounded-lg shadow p-4 border border-white">
                 <div class="flex flex-col gap-4">
                     <div>
-                        <div class="flex items-start justify-between mb-2">
-                            <div class="flex mb-2 gap-3">
+                        <div class="flex items-start justify-between mb-2 gap-3">
+                            <div class="block mb-2 gap-3">
                                 <span class="text-lg font-semibold flex">{{ $developer->name }}</span>
-                                <flux:badge size="sm" class="h-6 min-w-[28px] flex items-center justify-center">{{ $developer->articles->count() }}</flux:badge>
+                                <flux:badge size="sm" class="h-6 min-w-[28px] flex items-center justify-center">
+                                    {{ $developer->articles->count() }} {{ $developer->articles->count() === 1 ? 'artigo publicado' : 'artigos publicados' }}
+                                </flux:badge>
                             </div>
-                            <div class="flex items-center gap-2">
+                            <div class="flex items-center gap-1">
                                 <flux:button  size="xs" variant="outline" wire:click="edit({{ $developer->id }})"><flux:icon.pencil-square variant="mini" /></flux:button>
                                 <flux:button size="xs" variant="danger" wire:click="delete({{ $developer->id }})"><flux:icon.x-mark variant="mini" /></flux:button>
                             </div>
