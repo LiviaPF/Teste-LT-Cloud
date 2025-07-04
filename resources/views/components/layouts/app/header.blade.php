@@ -113,6 +113,9 @@
                     <flux:navlist.item icon="layout-grid" :href="route('articles')" :current="request()->routeIs('articles')" wire:navigate>
                       {{ __('Articles') }}
                     </flux:navlist.item>
+                    <flux:navlist.item icon="layout-grid" :href="route('skills')" :current="request()->routeIs('skills')" wire:navigate>
+                      {{ __('Skills') }}
+                    </flux:navlist.item>
                 </flux:navlist.group>
             </flux:navlist>
 
