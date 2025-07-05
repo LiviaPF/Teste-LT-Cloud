@@ -25,13 +25,15 @@ class Articles extends Component
             Article::findOrFail($this->articleId)->delete();
             $this->articleId = null;
             Flux::modal('delete-article-' . $this->articleId)->close();
-            session()->flash('success', 'Article deleted successfully!');
+            session()->flash('success', 'Article deleted!');
         }
     }
 
     public function render()
     {
-        $articles = Article::with('developers')->orderBy('created_at', 'desc')->paginate(9);
+        $articles = Article::with('developers')
+            ->orderBy('title')
+            ->paginate(9);
         return view('livewire.articles', [
             'articles' => $articles
         ]);
