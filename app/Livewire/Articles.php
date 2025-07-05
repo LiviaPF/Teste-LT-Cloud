@@ -12,6 +12,7 @@ class Articles extends Component
     use WithPagination;
 
     public $articleId;
+    public $searchQuery = null;
 
     public function delete($id)
     {
@@ -32,6 +33,7 @@ class Articles extends Component
     public function render()
     {
         $articles = Article::with('developers')
+            ->where('title', 'like', '%' . $this->searchQuery . '%')
             ->orderBy('title')
             ->paginate(9);
         return view('livewire.articles', [

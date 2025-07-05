@@ -1,9 +1,12 @@
 <div class="mb-6 w-full">
     <div class="flex justify-between items-center mb-2">
         <flux:heading size="xl" level="1">{{ __('Articles') }}</flux:heading>
-        <a href="{{ route('articles.create') }}" target="_blank">
-            <flux:button class="mt-4">Add article</flux:button>
-        </a>
+        <div class="flex items-center justify-end gap-2">
+            <flux:input class="mt-4" wire:model.live="searchQuery" placeholder="Article title..." />
+            <a href="{{ route('articles.create') }}" target="_blank">
+                <flux:button class="mt-4">Add article</flux:button>
+            </a>
+        </div>
     </div>
     <flux:separator variant="subtle" class="mb-4" />
 
