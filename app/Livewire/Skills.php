@@ -12,10 +12,14 @@ class Skills extends Component
     use WithPagination;
 
     public $skillId;
+    public $searchQuery = null;
 
     public function render()
     {
-        $skills = Skill::orderBy('created_at', 'desc')->paginate(15);
+        $skills = Skill::where('name', 'like', '%' . $this->searchQuery . '%')
+            ->orderBy('name')
+            ->paginate(15);
+
         return view('livewire.skills', [
             'skills' => $skills
         ]);

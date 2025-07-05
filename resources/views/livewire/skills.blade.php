@@ -1,7 +1,8 @@
 <div class="relative mb-6 w-full">
     <div class="flex justify-between items-center mb-2">
         <flux:heading size="xl" level="1">{{ __('Skills') }}</flux:heading>
-        <div class="flex justify-end gap-2">
+        <div class="flex items-center justify-end gap-2">
+            <flux:input class="mt-4" wire:model.live="searchQuery" placeholder="Skill name..." />
             <flux:modal.trigger name="create-skill">
                 <flux:button class="mt-4">Add skill</flux:button>
             </flux:modal.trigger>
