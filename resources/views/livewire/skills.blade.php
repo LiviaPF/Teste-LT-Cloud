@@ -1,29 +1,55 @@
-<div>
-    <h1 class="text-2xl font-bold mb-4">{{ __('Skills') }}</h1>
+<div class="relative mb-6 w-full">
+    <div class="flex justify-between items-center mb-2">
+        <flux:heading size="xl" level="1">{{ __('Skills') }}</flux:heading>
+        <div class="flex justify-end gap-2">
+            <flux:modal.trigger name="create-skill">
+                <flux:button class="mt-4">Add skill</flux:button>
+            </flux:modal.trigger>
+        </div>
+    </div>
+    <flux:separator variant="subtle" />
+
+    @session('success')
+    <div
+        x-data="{ show: true }"
+        x-show="show"
+        x-init="setTimeout(() => show = false, 3000)"
+        class="absolute top-5 right-5 bg-green-500 text-zinc-500 text-sm p-4 rounded-lg shadow-lg z-50"
+        role="alert"
+    >
+        <p>{{ $value }}</p>
+    </div>
+    @endsession('success')
+
+    <livewire:create-skill/>
+    <livewire:edit-skill/>
 
     {{-- Skills table --}}
-    <table class="table-auto w-full bg-slate-800 mt-5 shadow-md rounded-md">
-        <thead class="bg-slate-900">
-            <tr>
-                <th class="px-4 py-2 text-left text-sm font-semibold text-gray-300">Name</th>
-                <th class="px-4 py-2 text-left text-sm font-semibold text-gray-300">Actions</th>
-            </tr>
+    <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+        <tr>
+            <th scope="col" class="text-lg px-6 py-3 flex justify-start">
+                Name
+            </th>
+            <th scope="col" class="text-lg px-6 py-3">
+                Actions
+            </th>
+        </tr>
         </thead>
-
         <tbody>
-            @forelse($skills as $skill)
-                <tr class="border-b border-gray-700 hover:bg-gray-800">
-                    <td class="px-4 py-2 text-sm text-gray-300">{{ $skill->name }}</td>
-                    <td class="px-4 py-2 text-center space-x-2">
-                        <flux:button size="xs" variant="outline" wire:click="edit({{ $skill->id }})"><flux:icon.pencil-square variant="mini" /></flux:button>
-                        <flux:button size="xs" variant="danger" wire:click="delete({{ $skill->id }})"><flux:icon.x-mark variant="mini" /></flux:button>
+            @foreach($skills as $skill)
+                <tr class="border-b">
+                    <td class="px-6 py-4 mb-1">
+                        {{ $skill->name }}
                     </td>
+                <td class="px-6 py-4 flex items-center justify-center mb-1">
+                    <div class="flex items-center gap-1">
+                        <flux:button size="xs" wire:click="edit({{ $skill->id }})"><flux:icon.pencil-square variant="mini" /></flux:button>
+                        <flux:button size="xs" variant="danger" wire:click="delete({{ $skill->id }})"><flux:icon.x-mark variant="mini" /></flux:button>
+                    </div>
+                </td>
                 </tr>
-            @empty
-                <tr>
-                    <td colspan="3" class="px-4 py-2 text-sm text-gray-300 text-center">No skills found</td>
-                </tr>
-            @endforelse
+            @endforeach
         </tbody>
     </table>
 
@@ -31,4 +57,27 @@
     <div class="mt-4">
         {{ $skills->links('') }}
     </div>
+
+    <flux:modal name="delete-skill" class="min-w-[22rem]">
+        <div class="space-y-6">
+            <div>
+                <flux:heading size="lg">Delete dev?</flux:heading>
+
+                <flux:text class="mt-2">
+                    <p>You're about to delete this skill.</p>
+                    <p>This action cannot be reversed.</p>
+                </flux:text>
+            </div>
+
+            <div class="flex gap-2">
+                <flux:spacer />
+
+                <flux:modal.close>
+                    <flux:button variant="ghost">Cancel</flux:button>
+                </flux:modal.close>
+
+                <flux:button type="submit" variant="danger" wire:click="deleteSkill">Delete skill</flux:button>
+            </div>
+        </div>
+    </flux:modal>
 </div>
