@@ -1,17 +1,22 @@
 <div class="relative mb-6 w-full">
     <div class="flex justify-between items-center mb-2">
         <flux:heading size="xl" level="1">{{ __('Developers') }}</flux:heading>
-        <flux:modal.trigger name="create-developer">
-            <flux:button class="mt-4">Add developer</flux:button>
-        </flux:modal.trigger>
+        <div class="flex justify-end gap-2">
+            <div class="mt-4">
+                <livewire:filter-developer />
+            </div>
+            <flux:modal.trigger name="create-developer">
+                <flux:button class="mt-4">Add developer</flux:button>
+            </flux:modal.trigger>
+        </div>
     </div>
-    <flux:separator variant="subtle" />
+    <flux:separator variant="subtle" class="mb-4" />
     @session('success')
     <div
         x-data="{ show: true }"
         x-show="show"
         x-init="setTimeout(() => show = false, 3000)"
-        class="fixed bottom-5 right-5 bg-green-500 text-zinc-500 text-sm p-4 rounded-lg shadow-lg z-50"
+        class="fixed top-5 right-5 bg-green-500 text-zinc-500 text-sm p-4 rounded-lg shadow-lg z-50"
         role="alert"
     >
         <p>{{ $value }}</p>

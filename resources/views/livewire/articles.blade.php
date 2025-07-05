@@ -5,7 +5,7 @@
             <flux:button class="mt-4">Add article</flux:button>
         </a>
     </div>
-    <flux:separator variant="subtle"" />
+    <flux:separator variant="subtle" class="mb-4" />
 
     @if (session('success'))
         <div
