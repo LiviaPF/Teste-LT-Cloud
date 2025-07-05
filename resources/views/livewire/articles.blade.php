@@ -1,11 +1,11 @@
 <div class="mb-6 w-full">
     <div class="flex justify-between items-center mb-2">
-        <flux:heading size="xl" level="1" class="text-3xl font-bold text-gray-800">{{ __('Articles') }}</flux:heading>
+        <flux:heading size="xl" level="1">{{ __('Articles') }}</flux:heading>
         <a href="{{ route('articles.create') }}" target="_blank">
-            <flux:button class="mt-4 bg-blue-500 text-white hover:bg-blue-600">Add article</flux:button>
+            <flux:button class="mt-4">Add article</flux:button>
         </a>
     </div>
-    <flux:separator variant="subtle" class="border-gray-200" />
+    <flux:separator variant="subtle"" />
 
     @if (session('success'))
         <div
@@ -21,28 +21,27 @@
 
     <div class="grid gap-4 grid-cols-1 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-4">
         @forelse ($articles as $article)
-            <div class="rounded-lg shadow p-4 border border-gray-200 bg-white">
+            <div class="rounded-lg shadow p-4 border border-white">
                 <div class="flex flex-col gap-4">
                     <div>
-                        <div class="flex items-start justify-between mb-2">
+                        <div class="flex items-start justify-between mb-2 gap-3">
                             <div class="block mb-2 gap-3">
                                 <span class="text-lg font-semibold flex text-gray-800">{{ $article->title }}</span>
-                                <flux:badge size="sm" class="h-6 min-w-[28px] flex items-center justify-center bg-gray-100 text-gray-800">
-                                    {{ $article->developers->count() }} {{ Str::plural('author', $article->developers->count()) }}
+                                <flux:badge size="sm" class="h-6 min-w-[28px] flex items-center justify-center">
+                                {{ $article->developers->count() }} {{ Str::plural('author', $article->developers->count()) }}
                                 </flux:badge>
                             </div>
-                            <div class="flex items-center gap-1">
+                            <div class="flex items-start gap-1">
                                 <a href="{{ route('articles.edit', $article->id) }}" target="_blank">
-                                    <flux:button size="xs" variant="outline" class="border-gray-300 text-gray-600 hover:bg-gray-100">
-                                        <flux:icon.pencil-square variant="mini" />
-                                    </flux:button>
+                                    <flux:button  size="xs" variant="outline"><flux:icon.pencil-square variant="mini" /></flux:button>
                                 </a>
-                                <flux:button size="xs" variant="danger" class="border-red-300 text-red-600 hover:bg-red-100" wire:click="delete({{ $article->id }})">
-                                    <flux:icon.x-mark variant="mini" />
-                                </flux:button>
+                                <flux:button size="xs" variant="danger" wire:click="delete({{ $article->id }})"><flux:icon.x-mark variant="mini" /></flux:button>
                             </div>
                         </div>
-                        <p class="text-gray-500 text-sm">{{ $article->created_at->format('d/m/Y') }}</p>
+                        <div class="text-gray-500 text-sm flex items-stretch gap-1">
+                            <flux:icon.calendar-days variant="mini"/>
+                            {{ $article->created_at->format('d/m/Y') }}
+                        </div>
                     </div>
                 </div>
             </div>
