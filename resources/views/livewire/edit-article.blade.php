@@ -11,17 +11,14 @@
 
         <div>
             <flux:input type="text" label="Title" wire:model="title" placeholder="Enter article title" class="mt-1 block w-full border-gray-300 rounded-md p-2 focus:ring-blue-500 focus:border-blue-500" />
-            @error('title') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
         </div>
 
         <div>
             <flux:input type="text" label="Slug" wire:model="slug" placeholder="Enter article slug" pattern="[a-z0-9\-]*" class="mt-1 block w-full border-gray-300 rounded-md p-2 focus:ring-blue-500 focus:border-blue-500" />
-            @error('slug') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
         </div>
 
         <div>
-            <flux:textarea rows="20" label="Content" wire:model="content" placeholder="Enter article content" class="mt-1 block w-full border-gray-300 rounded-md p-2 focus:ring-blue-500 focus:border-blue-500" />
-            @error('content') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
+            <flux:textarea rows="15" label="Content" wire:model="content" placeholder="Enter article content" class="mt-1 block w-full border-gray-300 rounded-md p-2 focus:ring-blue-500 focus:border-blue-500" />
         </div>
 
         <div>
@@ -35,7 +32,6 @@
 
         <div>
             <flux:input type="file" label="New Image" wire:model="image" class="mt-1 block w-full border-gray-300 rounded-md p-2 focus:ring-blue-500 focus:border-blue-500" />
-            @error('image') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
         </div>
 
         <div>
@@ -44,16 +40,14 @@
                 <div class="mt-1 space-y-2">
                     <flux:checkbox
                         wire:model="developers"
-                        value="{{ $developer }}"
-                        label="{{ $developer }}"
+                        value="{{ $developer->id }}"
+                        label="{{ $developer->name }}"
                         class="form-checkbox h-4 w-4 text-blue-600"
-                        checked="{{ in_array($developer, $this->developers) ? 'checked' : '' }}"
                     />
                 </div>
             @empty
                 <p class="text-red-500 text-sm mt-2">No developers found. Please add developers to the database.</p>
             @endforelse
-            @error('developers.*') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
         </div>
 
         <div class="flex justify-end">

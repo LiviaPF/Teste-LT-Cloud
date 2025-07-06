@@ -60,7 +60,7 @@ class EditArticle extends Component
 
         $this->reset();
 
-        session()->flash('success', 'Article updated successfully!');
+        session()->flash('success', 'Article updated!');
         return redirect()->route('articles.index');
     }
 
