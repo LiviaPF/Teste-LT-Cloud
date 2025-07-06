@@ -1,18 +1,10 @@
 <div class="relative mb-6 w-full">
-    <div class="flex justify-between items-center mb-2">
-        <flux:heading size="xl" level="1">{{ __('Developers') }}</flux:heading>
-        <div class="flex items-center justify-end gap-1">
-            <div class="flex gap-1 mt-4">
-                <flux:input wire:model.live="searchQuery" placeholder="Name or e-mail..." />
-{{--                <flux:select wire:model.live="seniority">--}}
-{{--                    <flux:select.option value="">Any seniority</flux:select.option>--}}
-{{--                    <flux:select.option value="junior">Junior</flux:select.option>--}}
-{{--                    <flux:select.option value="mid">Mid</flux:select.option>--}}
-{{--                    <flux:select.option value="senior">Senior</flux:select.option>--}}
-{{--                </flux:select>--}}
-            </div>
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between mb-2 gap-4">
+        <flux:heading size="xl" level="1" class="flex-shrink-0 text-center w-full sm:w-auto">{{ __('Developers') }}</flux:heading>
+        <div class="flex items-center justify-start gap-2 w-full sm:flex-1">
+            <flux:input class="w-full sm:flex-1" wire:model.live="searchQuery" placeholder="Developer name..." />
             <flux:modal.trigger name="create-developer">
-                <flux:button class="mt-4">Add developer</flux:button>
+                <flux:button class="flex-shrink-0">Add developer</flux:button>
             </flux:modal.trigger>
         </div>
     </div>
@@ -53,7 +45,7 @@
                         <p class="text-gray-500">{{ $developer->email }}</p>
                     </div>
 
-                    <div class="flex flex-wrap gap-2">
+                    <div class="flex-wrap gap-2">
                         @forelse ($developer->skills as $skill)
                             <flux:badge size="sm">{{$skill->name}}</flux:badge>
 

@@ -1,10 +1,10 @@
 <div class="relative mb-6 w-full">
-    <div class="flex justify-between items-center mb-2">
-        <flux:heading size="xl" level="1">{{ __('Skills') }}</flux:heading>
-        <div class="flex items-center justify-end gap-2">
-            <flux:input class="mt-4" wire:model.live="searchQuery" placeholder="Skill name..." />
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between mb-2 gap-4">
+        <flux:heading size="xl" level="1" class="flex-shrink-0 text-center w-full sm:w-auto">{{ __('Skills') }}</flux:heading>
+        <div class="flex items-center justify-start gap-2 w-full sm:flex-1">
+            <flux:input class="w-full sm:flex-1" wire:model.live="searchQuery" placeholder="Skill name..." />
             <flux:modal.trigger name="create-skill">
-                <flux:button class="mt-4">Add skill</flux:button>
+                <flux:button class="flex-shrink-0">Add skill</flux:button>
             </flux:modal.trigger>
         </div>
     </div>
@@ -38,19 +38,19 @@
         </tr>
         </thead>
         <tbody>
-            @foreach($skills as $skill)
-                <tr class="border-b">
-                    <td class="px-6 py-4 mb-1">
-                        {{ $skill->name }}
-                    </td>
+        @foreach($skills as $skill)
+            <tr class="border-b">
+                <td class="px-6 py-4 mb-1">
+                    {{ $skill->name }}
+                </td>
                 <td class="px-6 py-4 flex items-center justify-center mb-1">
                     <div class="flex items-center gap-1">
                         <flux:button size="xs" wire:click="edit({{ $skill->id }})"><flux:icon.pencil-square variant="mini" /></flux:button>
                         <flux:button size="xs" variant="danger" wire:click="delete({{ $skill->id }})"><flux:icon.x-mark variant="mini" /></flux:button>
                     </div>
                 </td>
-                </tr>
-            @endforeach
+            </tr>
+        @endforeach
         </tbody>
     </table>
 
@@ -62,7 +62,7 @@
     <flux:modal name="delete-skill" class="min-w-[22rem]">
         <div class="space-y-6">
             <div>
-                <flux:heading size="lg">Delete dev?</flux:heading>
+                <flux:heading size="lg">Delete skill?</flux:heading>
 
                 <flux:text class="mt-2">
                     <p>You're about to delete this skill.</p>
