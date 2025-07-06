@@ -1,9 +1,15 @@
 <div class="relative mb-6 w-full">
     <div class="flex justify-between items-center mb-2">
         <flux:heading size="xl" level="1">{{ __('Developers') }}</flux:heading>
-        <div class="flex justify-end gap-2">
-            <div class="mt-4">
-                <livewire:filter-developer />
+        <div class="flex items-center justify-end gap-1">
+            <div class="flex gap-1 mt-4">
+                <flux:input wire:model.live="searchQuery" placeholder="Name or e-mail..." />
+{{--                <flux:select wire:model.live="seniority">--}}
+{{--                    <flux:select.option value="">Any seniority</flux:select.option>--}}
+{{--                    <flux:select.option value="junior">Junior</flux:select.option>--}}
+{{--                    <flux:select.option value="mid">Mid</flux:select.option>--}}
+{{--                    <flux:select.option value="senior">Senior</flux:select.option>--}}
+{{--                </flux:select>--}}
             </div>
             <flux:modal.trigger name="create-developer">
                 <flux:button class="mt-4">Add developer</flux:button>
@@ -16,7 +22,7 @@
         x-data="{ show: true }"
         x-show="show"
         x-init="setTimeout(() => show = false, 3000)"
-        class="fixed top-5 right-5 bg-green-500 text-zinc-500 text-sm p-4 rounded-lg shadow-lg z-50"
+        class="absolute top-5 right-5 bg-green-500 text-zinc-500 text-sm p-4 rounded-lg shadow-lg z-50"
         role="alert"
     >
         <p>{{ $value }}</p>
