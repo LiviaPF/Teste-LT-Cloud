@@ -1,5 +1,5 @@
 <div xmlns:flux="http://www.w3.org/1999/html">
-    <flux:modal name="edit-developer" class="md:w-900">
+    <flux:modal name="edit-developer" class="w-full">
         <div class="space-y-6">
             <div>
                 <flux:heading size="lg">Update dev</flux:heading>
@@ -12,6 +12,18 @@
                 <flux:radio value="mid" label="Mid" />
                 <flux:radio value="senior" label="Senior" />
             </flux:radio.group>
+                <div class="grid">
+                    @foreach($availableSkills as $availableSkill)
+                        <label>
+                            <input type="checkbox"
+                                    wire:click="updateSkills({{ $availableSkill->id }}, $event.target.checked)"
+                                   value="{{ $availableSkill->id }}"
+                                   wire:key="{{ $availableSkill->id }}"
+                                {{ $this->isBinded($availableSkill->id) ? 'checked' : '' }}>
+                            {{ $availableSkill->name }}
+                        </label>
+                    @endforeach
+                </div>
 
             <div class="flex">
                 <flux:spacer />
