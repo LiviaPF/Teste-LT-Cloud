@@ -12,7 +12,8 @@ class Developer extends Model
     protected $fillable = [
         'name',
         'email',
-        'seniority'
+        'seniority',
+        'skills'
     ];
 
     public function skills(): BelongsToMany
