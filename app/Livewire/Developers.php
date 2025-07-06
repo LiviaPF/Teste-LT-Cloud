@@ -12,11 +12,16 @@ class Developers extends Component
     use WithPagination;
 
     public $developerId;
+    public $searchQuery = null;
+    public $seniority = null;
 
     public function render()
     {
-        // Fetch developers with pagination
-        $developers = Developer::orderBy('created_at', 'desc')->paginate(9);
+        $developers = Developer::where('name', 'like', '%' . $this->searchQuery . '%')
+            ->orWhere('email', 'like', '%' . $this->searchQuery . '%')
+            ->orderBy('name')
+            ->paginate(9);
+
         return view('livewire.developers', [
             'developers' => $developers
         ]);
@@ -37,7 +42,7 @@ class Developers extends Component
     {
         $developer = Developer::find($this->developerId)->delete();
         Flux::modal('delete-developer')->close();
-        session()->flash('success', 'Developer deleted successfully!');
+        session()->flash('success', 'Developer deleted!');
         $this->redirectRoute('developers', navigate: true);
     }
 }
