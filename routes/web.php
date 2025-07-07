@@ -7,6 +7,7 @@ use App\Livewire\EditArticle;
 use App\Livewire\Settings\Appearance;
 use App\Livewire\Settings\Password;
 use App\Livewire\Settings\Profile;
+use App\Livewire\ShowArticle;
 use App\Livewire\Skills;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -29,6 +30,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('articles', Articles::class)->name('articles');
     Route::get('/articles/create', CreateArticle::class)->name('articles.create');
     Route::get('/articles/{id}/edit', EditArticle::class)->name('articles.edit');
+    Route::get('/article/{slug}', ShowArticle::class)->name('articles.show');
     Route::get('skills', Skills::class)->name('skills');
     Route::get('settings/profile', Profile::class)->name('settings.profile');
     Route::get('settings/password', Password::class)->name('settings.password');
