@@ -40,17 +40,11 @@ class CreateArticle extends Component
         try {
             $this->validate();
 
-            $base64Image = null;
-            if ($this->image) {
-                $imageContent = file_get_contents($this->image->getRealPath());
-                $base64Image = base64_encode($imageContent);
-            }
-
             $article = Article::create([
                 'title' => $this->title,
                 'slug' => Str::slug($this->title),
                 'content' => $this->content,
-                'image' => $base64Image,
+                'image' => $this->image,
             ]);
 
             $article->developers()->sync($this->developers ?: []);
