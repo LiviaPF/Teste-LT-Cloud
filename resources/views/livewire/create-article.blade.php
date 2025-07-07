@@ -1,5 +1,5 @@
 <div class="relative mb-6 w-full max-w-3xl mx-auto">
-    <flux:heading size="xl" level="1" class="text-center mb-6">{{ __('Edit Article') }}</flux:heading>
+    <flux:heading size="xl" level="1" class="text-center mb-6">{{ __('Create Article') }}</flux:heading>
     <flux:separator variant="subtle" class="mb-6" />
 
     <form wire:submit="save" class="space-y-6">
