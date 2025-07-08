@@ -24,7 +24,7 @@
     <livewire:create-developer/>
     <livewire:edit-developer/>
 
-    <div class="grid gap-4 grid-cols-1 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-4">
+    <div class="grid gap-4 grid-cols-1 sm:grid-cols-1 md:grid-cols-3 xl:grid-cols-4">
         @forelse ($developers as $developer)
             <div class="rounded-lg shadow p-4 border border-white">
                 <div class="flex flex-col gap-4">
@@ -37,7 +37,7 @@
                                 </flux:badge>
                             </div>
                             <div class="flex items-center gap-1">
-                                <flux:button  size="xs" variant="outline" wire:click="edit({{ $developer->id }})"><flux:icon.pencil-square variant="mini" /></flux:button>
+                                <flux:button size="xs" variant="outline" wire:click="edit({{ $developer->id }})"><flux:icon.pencil-square variant="mini" /></flux:button>
                                 <flux:button size="xs" variant="danger" wire:click="delete({{ $developer->id }})"><flux:icon.x-mark variant="mini" /></flux:button>
                             </div>
                         </div>
@@ -47,15 +47,13 @@
 
                     <div class="flex-wrap gap-2">
                         @forelse ($developer->skills as $skill)
-                            <flux:badge size="sm">{{$skill->name}}</flux:badge>
-
+                            <flux:badge size="sm">{{ $skill->name }}</flux:badge>
                         @empty
                             <p class="text-sm text-gray-500">No skills assigned</p>
                         @endforelse
                     </div>
                 </div>
             </div>
-
         @empty
             <div class="col-span-4 text-gray-500">
                 <p>{{ __('No developers found.') }}</p>
@@ -63,12 +61,12 @@
         @endforelse
     </div>
 
-    {{--Pagination--}}
+    <!-- Pagination -->
     <div class="mt-4">
         {{ $developers->links('') }}
     </div>
 
-    {{--Delete developers--}}
+    <!-- Delete developers -->
     <flux:modal name="delete-developer" class="min-w-[22rem]">
         <div class="space-y-6">
             <div>

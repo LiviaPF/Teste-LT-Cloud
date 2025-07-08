@@ -25,14 +25,14 @@
     <livewire:create-skill/>
     <livewire:edit-skill/>
 
-    {{-- Skills table --}}
+    <!-- Skills table -->
     <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+        <thead class="text-xs text-gray-700 uppercase dark:text-gray-400">
         <tr>
-            <th scope="col" class="text-lg px-6 py-3 flex justify-start">
+            <th scope="col" class="px-6 py-3 flex justify-start">
                 Name
             </th>
-            <th scope="col" class="text-lg px-6 py-3">
+            <th scope="col" class="px-6 py-3">
                 Actions
             </th>
         </tr>
@@ -40,10 +40,10 @@
         <tbody>
         @foreach($skills as $skill)
             <tr class="border-b">
-                <td class="px-6 py-4 mb-1">
+                <td class="px-6 mb-1">
                     {{ $skill->name }}
                 </td>
-                <td class="px-6 py-4 flex items-center justify-center mb-1">
+                <td class="px-6 mb-1 flex items-center justify-start">
                     <div class="flex items-center gap-1">
                         <flux:button size="xs" wire:click="edit({{ $skill->id }})"><flux:icon.pencil-square variant="mini" /></flux:button>
                         <flux:button size="xs" variant="danger" wire:click="delete({{ $skill->id }})"><flux:icon.x-mark variant="mini" /></flux:button>
@@ -54,7 +54,7 @@
         </tbody>
     </table>
 
-    {{-- Pagination --}}
+    <!-- Pagination -->
     <div class="mt-4">
         {{ $skills->links('') }}
     </div>
