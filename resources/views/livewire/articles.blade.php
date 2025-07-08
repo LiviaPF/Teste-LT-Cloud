@@ -59,24 +59,27 @@
         {{ $articles->links('') }}
     </div>
 
-    @foreach ($articles as $article)
-        <flux:modal name="delete-article-{{ $article->id }}" class="min-w-[22rem]">
-            <div class="space-y-6">
-                <div>
-                    <flux:heading size="lg">Delete article?</flux:heading>
-                    <flux:text class="mt-2">
-                        <p>You're about to delete this article.</p>
-                        <p>This action cannot be reversed.</p>
-                    </flux:text>
-                </div>
-                <div class="flex gap-2">
-                    <flux:spacer />
-                    <flux:modal.close>
-                        <flux:button variant="ghost">Cancel</flux:button>
-                    </flux:modal.close>
-                    <flux:button type="submit" variant="danger" wire:click="deleteArticle">Delete article</flux:button>
-                </div>
+    {{-- Delete articles --}}
+    <flux:modal name="delete-article" class="min-w-[22rem]">
+        <div class="space-y-6">
+            <div>
+                <flux:heading size="lg">Delete article?</flux:heading>
+
+                <flux:text class="mt-2">
+                    <p>You're about to delete this article.</p>
+                    <p>This action cannot be reversed.</p>
+                </flux:text>
             </div>
-        </flux:modal>
-    @endforeach
+
+            <div class="flex gap-2">
+                <flux:spacer />
+
+                <flux:modal.close>
+                    <flux:button variant="ghost">Cancel</flux:button>
+                </flux:modal.close>
+
+                <flux:button type="submit" variant="danger" wire:click="deleteArticle">Delete article</flux:button>
+            </div>
+        </div>
+    </flux:modal>
 </div>

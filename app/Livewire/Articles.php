@@ -22,17 +22,15 @@ class Articles extends Component
     public function delete($id)
     {
         $this->articleId = $id;
-        Flux::modal('delete-article-' . $id)->show();
+        Flux::modal('delete-article')->show();
     }
 
     public function deleteArticle()
     {
-        if ($this->articleId) {
-            Article::findOrFail($this->articleId)->delete();
-            $this->articleId = null;
-            Flux::modal('delete-article-' . $this->articleId)->close();
-            session()->flash('success', 'Article deleted!');
-        }
+        $article = Article::find($this->articleId)->delete();
+        Flux::modal('delete-article')->close();
+        session()->flash('success', 'Article deleted!');
+        $this->redirectRoute('articles', navigate: true);
     }
 
     public function render()
