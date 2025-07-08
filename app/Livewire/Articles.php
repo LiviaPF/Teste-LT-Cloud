@@ -14,6 +14,11 @@ class Articles extends Component
     public $articleId;
     public $searchQuery = null;
 
+    public function edit($id)
+    {
+        $this->redirectRoute('articles.edit', ['id' => $id], navigate: true);
+    }
+
     public function delete($id)
     {
         $this->articleId = $id;
