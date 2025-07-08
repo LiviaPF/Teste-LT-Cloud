@@ -1,4 +1,4 @@
-<div class="relative mb-6 w-full max-w-3xl mx-auto max-h-screen overflow-y-auto">
+<div class="relative mb-6 w-full max-w-3xl mx-auto">
     <div class="flex items-center justify-between mb-4">
         <flux:button variant="ghost" wire:navigate href="{{ route('articles') }}">Back to Articles</flux:button>
     </div>
@@ -34,9 +34,9 @@
 
         <div class="w-full">
             @if ($this->imageSrc)
-                <img src="{{ $this->imageSrc }}" alt="Imagem do artigo" class="rounded-xl w-full object-cover" />
+                <img src="{{ $this->imageSrc }}" alt="Article image" class="rounded-xl w-full object-cover" />
             @else
-                <p class="text-gray-500 text-sm">Nenhuma imagem disponível.</p>
+                <p class="text-gray-500 text-sm">No image available.</p>
             @endif
         </div>
 

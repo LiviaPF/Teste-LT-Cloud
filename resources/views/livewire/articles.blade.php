@@ -37,7 +37,9 @@
                                 <flux:button size="xs" variant="danger" wire:click="delete({{ $article->id }})"><flux:icon.x-mark variant="mini" /></flux:button>
                             </div>
                         </div>
-                        <p class="text-gray-500 line-clamp-3">{{ $article->content }}</p>
+                        <div class="overflow-hidden" style="max-height: 15em; /* Aproximadamente 10 linhas com line-height padrão */">
+                            <p class="text-gray-500 break-words">{{ $article->content }}</p>
+                        </div>
                     </div>
                     <div class="text-gray-500 text-sm flex items-stretch gap-1">
                         <flux:icon.calendar-days variant="mini"/>
