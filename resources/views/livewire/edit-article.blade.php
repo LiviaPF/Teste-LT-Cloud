@@ -4,10 +4,15 @@
 
     <form wire:submit="update" class="space-y-6">
         <flux:label for="title">Title</flux:label>
-        <flux:input id="title" wire:model.live="title" placeholder="Enter article title..." class="w-full" />
+        <flux:input wire:model.defer="title" id="title" wire:model.live="title" placeholder="Enter article title..." class="w-full" />
 
-        <flux:label for="slug">Slug</flux:label>
-        <flux:input id="slug" wire:model.live="slug" placeholder="Enter article slug..." pattern="[a-z0-9\-]*" class="w-full" />
+        <flux:input
+            label="Slug"
+            wire:model.live.debounce.1000ms="slug"
+            :state="$errors->has('slug') ? 'error' : null"
+            pattern="[a-z\-]*"
+            helper="Only lowercase letters separated by a hyphen (e.g. my-example-article)"
+        />
 
         <flux:label for="content">Content</flux:label>
         <flux:textarea id="content" wire:model.live="content" placeholder="Enter article content..." rows="10" class="w-full" />

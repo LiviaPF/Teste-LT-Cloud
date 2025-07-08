@@ -15,7 +15,7 @@ class CreateArticle extends Component
 {
     use WithFileUploads;
 
-    public $title, $image, $content;
+    public $title, $image, $content, $slug;
     public $developers = [];
     public $availableDevelopers;
 
@@ -29,11 +29,35 @@ class CreateArticle extends Component
         return [
             'title' => 'required|string|max:255',
             'content' => 'required|min:10|max:65000',
-//            'slug' => 'required|string|max:255|unique:articles,slug,',
+            'slug' => ['required', 'regex:/^[a-z]+(-[a-z]+)*$/'],
             'image' => 'nullable|file|mimes:jpeg,png,jpg,gif|max:2048',
             'developers' => 'required|array|min:1',
             'developers.*' => 'exists:developers,id',
         ];
+    }
+
+    protected function messages()
+    {
+        return [
+            'slug.required' => 'The slug field is required.',
+            'slug.regex' => 'The slug must contain only lowercase letters, separated by hyphen (e.g.: my-example-article).',
+        ];
+    }
+
+    public function generateSlug()
+    {
+        $this->slug = strtolower(preg_replace('/[^a-zA-Z]+/', '-', $this->title));
+        $this->slug = trim($this->slug, '-');
+    }
+
+    public function updatedTitle()
+    {
+        $this->generateSlug();
+    }
+
+    public function updatedSlug()
+    {
+        $this->validateOnly('slug');
     }
 
     public function save()
@@ -97,7 +121,7 @@ class CreateArticle extends Component
 
             $article = Article::create([
                 'title' => $this->title,
-                'slug' => Str::slug($this->title),
+                'slug' => Str::slug($this->slug),
                 'content' => $this->content,
                 'image' => $imageBytes,
             ]);

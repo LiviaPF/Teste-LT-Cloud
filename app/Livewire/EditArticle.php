@@ -27,7 +27,6 @@ class EditArticle extends Component
         $this->title = $this->article->title;
         $this->slug = $this->article->slug;
         $this->content = $this->article->content;
-//        $this->image = $this->article->image;
         $this->developers = $this->article->developers->pluck('id')->toArray();
         $this->availableDevelopers = Developer::all();
 
@@ -41,7 +40,7 @@ class EditArticle extends Component
     {
         return [
             'title' => 'required|string|max:255',
-//            'slug' => 'required|string|max:255|unique:articles,slug,' . $this->articleId,
+            'slug' => ['required', 'regex:/^[a-z]+(-[a-z]+)*$/'],
             'content' => 'required|min:10|max:65000',
             'newImage' => 'nullable|file|mimes:jpeg,png,jpg,gif|max:2048',
             'developers' => 'required|array|min:1',
@@ -130,6 +129,30 @@ class EditArticle extends Component
             Log::error('Error in update method: ' . $e->getMessage());
             session()->flash('error', 'Failed to update article: ' . $e->getMessage());
         }
+    }
+
+    protected function messages()
+    {
+        return [
+            'slug.required' => 'The slug field is required.',
+            'slug.regex' => 'The slug must contain only lowercase letters, separated by hyphen (e.g.: my-example-article).',
+        ];
+    }
+
+    public function updatedTitle()
+    {
+        $this->generateSlug();
+    }
+
+    public function generateSlug()
+    {
+        $this->slug = strtolower(preg_replace('/[^a-zA-Z]+/', '-', $this->title));
+        $this->slug = trim($this->slug, '-');
+    }
+
+    public function updatedSlug()
+    {
+        $this->validateOnly('slug');
     }
 
     public function render()
