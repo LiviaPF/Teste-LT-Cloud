@@ -14,11 +14,14 @@
 
         <div>
             <flux:label for="image">Image (optional)</flux:label>
-            <flux:input type="file" id="image" wire:model.live="image" class="w-full" accept="image/*" />
-            @if($image && !is_string($image))
-                <img src="{{ $image->temporaryUrl() }}" alt="Preview" class="mt-2 max-w-xs rounded" />
-            @elseif($article && $article->image)
-                <img src="{{ $article->image }}" alt="Current article image" class="mt-2 max-w-xs rounded" />
+            <flux:input type="file" id="image" wire:model.live="newImage" class="w-full" accept="image/*" />
+            @if($newImage && !is_string($newImage))
+                <img src="{{ $newImage->temporaryUrl() }}" alt="Preview" class="mt-2 max-w-xs rounded" />
+            @elseif ($image)
+                <div class="mt-4">
+                    <p class="text-sm text-gray-500 dark:text-gray-400 mb-1">Current image:</p>
+                    <img src="{{ $image }}" alt="Current image" class="rounded-md w-48 h-48 object-cover border" />
+                </div>
             @else
                 <p class="text-gray-500 text-sm mt-2">No image uploaded.</p>
             @endif
