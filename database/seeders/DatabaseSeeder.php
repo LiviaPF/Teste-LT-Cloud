@@ -14,11 +14,11 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-//        $this->call([
-//            SkillSeeder::class,
-//            DeveloperSeeder::class,
-//            ArticleSeeder::class
-//        ]);
+        $this->call([
+            SkillSeeder::class,
+            DeveloperSeeder::class,
+            ArticleSeeder::class
+        ]);
 
         User::factory()->tester()->create();
     }
